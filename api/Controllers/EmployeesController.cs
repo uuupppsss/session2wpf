@@ -13,6 +13,7 @@ namespace api.Controllers
         {
             this.context = context;
         }
+
         [HttpGet("GetEmployeesList")]
         public ActionResult<List<Employee>> GetEmployeesList(int subdivision_id)
         {
@@ -21,5 +22,7 @@ namespace api.Controllers
             if (employees == null) return NotFound();
             return Ok(employees);
         }
+
+
     }
 }
