@@ -16,7 +16,10 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        
-        
+
+        <ListBox Grid.Column="1">
+            
+        </ListBox>
+
     </Grid>
 </Window>

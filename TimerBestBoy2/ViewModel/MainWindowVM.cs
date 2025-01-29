@@ -10,6 +10,5 @@ namespace TimerBestBoy2.ViewModel
     class MainWindowVM:BaseVM
     {
 		
-
 	}
 }

@@ -12,4 +12,9 @@
     <Folder Include="Converter\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="GraphX" Version="3.0.0" />
+    <PackageReference Include="XGraph" Version="2.4.2" />
+  </ItemGroup>
+
 </Project>
