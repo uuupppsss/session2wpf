@@ -23,7 +23,7 @@ namespace TimerBestBoy2.View
         public MainWindow()
         {
             InitializeComponent();
-            LoadGraph();
+            //LoadGraph();
         }
 
         private void LoadGraph()
