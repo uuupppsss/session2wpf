@@ -7,6 +7,56 @@
         mc:Ignorable="d"
         Title="InfoWin" Height="450" Width="800">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel>
+            <Label Content="ФИО"/>
+            <TextBox/>
+            <Label Content="День рождения"/>
+            <TextBox/>
+            <Label Content="Подразделение"/>
+            <ComboBox/>
+            <Label Content="Должность"/>
+            <ComboBox/>
+            <Label Content="Руководитель"/>
+            <ComboBox/>
+            <Label Content="Помощник"/>
+            <ComboBox/>
+            <Label Content="Рабочий телефон"/>
+            <TextBox/>
+            <Label Content="Электронная почта"/>
+            <TextBox/>
+            <Label Content="Кабинет"/>
+            <TextBox/>
+            <Label Content="Прочая информация"/>
+            <TextBox/>
+        </StackPanel>
+
+
+        <StackPanel Grid.Column="1" Orientation="Vertical">
+            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                <Button Margin="5" Width="100" Height="50"/>
+                <Button Margin="5" Width="100" Height="50"/>
+                <Button Margin="5" Width="100" Height="50"/>
+            </StackPanel>
+
+            <Label Content="Обучения"/>
+            <ListBox>
+                
+            </ListBox>
+            <Label Content="Отгулы"/>
+            <ListBox>
+                
+            </ListBox>
+
+            <Label Content="Отпуска"/>
+            <ListBox>
+                
+            </ListBox>
+
+        </StackPanel>
     </Grid>
 </Window>

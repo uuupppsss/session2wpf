@@ -26,37 +26,37 @@ namespace TimerBestBoy2.View
             //LoadGraph();
         }
 
-        private void LoadGraph()
-        {
-            var graph = new OrgGraph();
+    //    private void LoadGraph()
+    //    {
+    //        var graph = new OrgGraph();
 
-            var root = new OrgVertex("Дороги России");
-            var dept1 = new OrgVertex("Административный департамент");
-            var dept2 = new OrgVertex("Академия Уменя дороги");
-            var dept3 = new OrgVertex("Договорной отдел");
-            var dept4 = new OrgVertex("Общий отдел");
-            var dept5 = new OrgVertex("Лицензионный отдел");
-            var dept6 = new OrgVertex("Управление маркетинга");
+    //        var root = new OrgVertex("Дороги России");
+    //        var dept1 = new OrgVertex("Административный департамент");
+    //        var dept2 = new OrgVertex("Академия Уменя дороги");
+    //        var dept3 = new OrgVertex("Договорной отдел");
+    //        var dept4 = new OrgVertex("Общий отдел");
+    //        var dept5 = new OrgVertex("Лицензионный отдел");
+    //        var dept6 = new OrgVertex("Управление маркетинга");
 
-            graph.AddVertexRange(new[] { root, dept1, dept2, dept3, dept4, dept5, dept6 });
+    //        graph.AddVertexRange(new[] { root, dept1, dept2, dept3, dept4, dept5, dept6 });
 
-            graph.AddEdge(new OrgEdge(root, dept1));
-            graph.AddEdge(new OrgEdge(root, dept2));
-            graph.AddEdge(new OrgEdge(root, dept3));
-            graph.AddEdge(new OrgEdge(root, dept4));
-            graph.AddEdge(new OrgEdge(root, dept5));
-            graph.AddEdge(new OrgEdge(root, dept6));
+    //        graph.AddEdge(new OrgEdge(root, dept1));
+    //        graph.AddEdge(new OrgEdge(root, dept2));
+    //        graph.AddEdge(new OrgEdge(root, dept3));
+    //        graph.AddEdge(new OrgEdge(root, dept4));
+    //        graph.AddEdge(new OrgEdge(root, dept5));
+    //        graph.AddEdge(new OrgEdge(root, dept6));
 
-            var logic = new GXLogicCore<OrgVertex, OrgEdge, OrgGraph>
-            {
-                Graph = graph
-            };
+    //        var logic = new GXLogicCore<OrgVertex, OrgEdge, OrgGraph>
+    //        {
+    //            Graph = graph
+    //        };
 
-            var area = new GraphArea<OrgVertex, OrgEdge, OrgGraph> { LogicCore = logic };
+    //        var area = new GraphArea<OrgVertex, OrgEdge, OrgGraph> { LogicCore = logic };
             
-            area.GenerateGraph();
+    //        area.GenerateGraph();
 
-            Content = area;
-        }
+    //        Content = area;
+    //    }
     }
 }
