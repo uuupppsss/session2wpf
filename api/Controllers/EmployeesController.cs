@@ -23,6 +23,5 @@ namespace api.Controllers
             return Ok(employees);
         }
 
-
     }
 }

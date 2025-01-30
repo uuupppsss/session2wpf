@@ -31,7 +31,7 @@
             <TextBox/>
             <Label Content="Кабинет"/>
             <TextBox/>
-            <Label Content="Прочая информация"/>
+            <Label Content="Прочая информация;"/>
             <TextBox/>
         </StackPanel>
 
@@ -47,6 +47,7 @@
             <ListBox>
                 
             </ListBox>
+            
             <Label Content="Отгулы"/>
             <ListBox>
                 
