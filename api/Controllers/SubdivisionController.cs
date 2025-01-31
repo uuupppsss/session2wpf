@@ -15,11 +15,22 @@ namespace api.Controllers
         }
 
         [HttpGet("GetSubdivisionsList")]
-        public ActionResult<List<Subdivision>> GetSubdivisionsList()
+        public ActionResult<List<SubdivisionDTO>> GetSubdivisionsList()
         {
-            List<Subdivision> result = [.. context.Subdivisions];
+            List<SubdivisionDTO> result = [];
+            foreach (var s in context.Subdivisions)
+            {
+                result.Add(new SubdivisionDTO()
+                {
+                    Id = s.Id,
+                    Description = s.Description,
+                    SupervisorId = s.SupervisorId,
+                    Name = s.Name
+                });
+            }
             if(result==null) return NotFound();
             return Ok(result);
+            
         }
     }
 }

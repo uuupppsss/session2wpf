@@ -17,11 +17,28 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <ListBox Grid.Column="1">
-            
+        <ListBox ItemsSource="{Binding Subdivisions}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
         </ListBox>
+        
+        <StackPanel Grid.Column="1" Orientation="Vertical">
+            <ListBox ItemsSource="{Binding Employees}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Vertical">
+                            
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
 
-        <Button />
+            <Button Content="+" Width="30" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+        </StackPanel>
+            
 
     </Grid>
 </Window>

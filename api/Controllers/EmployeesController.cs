@@ -42,9 +42,29 @@ namespace api.Controllers
             return Ok(result);
         }
         [HttpPost("UpdateEmployee")]
-        public ActionResult UpdateEmployee(EmployeeDTO employee)
+        public async Task<ActionResult> UpdateEmployee(EmployeeDTO employee)
         {
-
+            if(employee==null) return BadRequest();
+            Employee found_employee = context.Employees.FirstOrDefault(e => e.Id == employee.Id);
+            if (found_employee == null) return NotFound();
+            Employee result = new Employee()
+            {
+                Id = employee.Id,
+                Initials = employee.Initials,
+                Birthday = employee.Birthday,
+                Phone = employee.Phone,
+                Office = employee.Office,
+                Email = employee.Email,
+                SubdivisionId = employee.SubdivisionId,
+                Ect = employee.Ect,
+                SupervisorId = employee.SupervisorId,
+                HelperId = employee.HelperId,
+                JobTitleId = employee.JobTitleId,
+                MobilePhone = employee.MobilePhone
+            };
+            context.Employees.Update(result);
+            await context.SaveChangesAsync();
+            return Ok(result);
         }
 
 
