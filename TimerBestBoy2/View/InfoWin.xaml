@@ -33,14 +33,15 @@
             <TextBox/>
             <Label Content="Прочая информация;"/>
             <TextBox/>
+            <Button Content="Сохранить"/>
         </StackPanel>
 
 
         <StackPanel Grid.Column="1" Orientation="Vertical">
             <StackPanel Grid.Column="1" Orientation="Horizontal">
-                <Button Margin="5" Width="100" Height="50"/>
-                <Button Margin="5" Width="100" Height="50"/>
-                <Button Margin="5" Width="100" Height="50"/>
+                <Button Margin="5" Width="100" Height="50" Content="Прошедшие"/>
+                <Button Margin="5" Width="100" Height="50" Content="Текущие"/>
+                <Button Margin="5" Width="100" Height="50" Content="Будущие"/>
             </StackPanel>
 
             <Label Content="Обучения"/>

@@ -1,6 +1,7 @@
 ﻿using api.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel;
 
 namespace api.Controllers
 {
@@ -14,10 +15,15 @@ namespace api.Controllers
             this.context = context;
         }
 
-        [HttpGet("GetStudiesList")]
-        public ActionResult<List<Event>> GetStudiesList()
+        [HttpGet("GetEventsListByType")]
+        public ActionResult<List<Event>> GetEventsListByType(int type_id)
         {
-
+            if (type_id <= 0) return BadRequest(); 
+            List<Event> result=context.Events.Where(e=>e.TypeId==type_id).ToList();
+            if (result==null) return NotFound();
+            return Ok(result);
         }
+
+
     }
 }

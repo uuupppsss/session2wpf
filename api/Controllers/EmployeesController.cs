@@ -20,8 +20,33 @@ namespace api.Controllers
             if (subdivision_id == 0) return BadRequest();
             List<Employee> employees = [.. context.Employees.Where(e=>e.SubdivisionId==subdivision_id)];
             if (employees == null) return NotFound();
-            return Ok(employees);
+            var result=new List<EmployeeDTO>();
+            foreach (Employee employee in employees)
+            {
+                result.Add(new EmployeeDTO()
+                {
+                    Id = employee.Id,
+                    Initials = employee.Initials,
+                    Birthday = employee.Birthday,
+                    Phone = employee.Phone,
+                    Office = employee.Office,
+                    Email = employee.Email,
+                    SubdivisionId = employee.SubdivisionId,
+                    Ect = employee.Ect,
+                    SupervisorId = employee.SupervisorId,
+                    HelperId = employee.HelperId,
+                    JobTitleId = employee.JobTitleId,
+                    MobilePhone = employee.MobilePhone
+                });
+            }
+            return Ok(result);
         }
+        [HttpPost("UpdateEmployee")]
+        public ActionResult UpdateEmployee(EmployeeDTO employee)
+        {
+
+        }
+
 
     }
 }

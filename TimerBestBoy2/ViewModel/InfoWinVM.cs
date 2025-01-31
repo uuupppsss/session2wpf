@@ -21,5 +21,12 @@ namespace TimerBestBoy2.ViewModel
 			}
 		}
 
-	}
+		public CustomCommand Save {  get; set; }
+
+        public InfoWinVM()
+        {
+            
+        }
+
+    }
 }
