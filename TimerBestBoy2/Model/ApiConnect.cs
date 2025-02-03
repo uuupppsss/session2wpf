@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -29,11 +30,11 @@ namespace TimerBestBoy2.Model
             };
         }
 
-        public async List<Subdivision> GetSubdivisionsList()
+        public async Task<List<Subdivision>> GetSubdivisionsList()
         {
             try
             {
-                var response = await client.GetAsync("");
+                var response = await client.GetAsync("Subdivision/GetSubdivisionsList");
                 if (!response.IsSuccessStatusCode)
                 {
                     MessageBox.Show("Что-то пошло не так", $"Ошибка: {response.StatusCode}");
@@ -41,12 +42,57 @@ namespace TimerBestBoy2.Model
                 }
                 else
                 {
-
+                    return await response.Content.ReadFromJsonAsync<List<Subdivision>>();
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Всё сломалось: {ex.Message}");
+                return null;
+            }
+        }
+
+        public async Task<List<Employee>> GetEmployeesList(int subdivision_id)
+        {
+            try
+            {
+                var response = await client.GetAsync($"Employees/GetEmployeesList?subdivision_id={subdivision_id}");
+                if (!response.IsSuccessStatusCode)
+                {
+                    MessageBox.Show("Что-то пошло не так", $"Ошибка: {response.StatusCode}");
+                    return null;
+                }
+                else
+                {
+                    return await response.Content.ReadFromJsonAsync<List<Employee>>();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Всё сломалось: {ex.Message}");
+                return null;
+            }
+        }
+
+        public async Task<List<Event>> GetEventsList()
+        {
+            try
+            {
+                var response = await client.GetAsync($"Events/GetEmployeesList?subdivision_id={subdivision_id}");
+                if (!response.IsSuccessStatusCode)
+                {
+                    MessageBox.Show("Что-то пошло не так", $"Ошибка: {response.StatusCode}");
+                    return null;
+                }
+                else
+                {
+                    return await response.Content.ReadFromJsonAsync<List<Employee>>();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Всё сломалось: {ex.Message}");
+                return null;
             }
         }
     }

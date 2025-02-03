@@ -15,11 +15,12 @@ namespace api.Controllers
             this.context = context;
         }
 
-        [HttpGet("GetEventsListByType")]
-        public ActionResult<List<Event>> GetEventsListByType(int type_id)
+        [HttpGet("GetEventsListByTypeNEmployee")]
+        public ActionResult<List<Event>> GetEventsListByTypeNEmployee(int type_id, int employee_id)
         {
             if (type_id <= 0) return BadRequest(); 
             List<Event> result=context.Events.Where(e=>e.TypeId==type_id).ToList();
+            
             if (result==null) return NotFound();
             return Ok(result);
         }
