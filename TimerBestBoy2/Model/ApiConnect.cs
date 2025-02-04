@@ -22,6 +22,7 @@ namespace TimerBestBoy2.Model
                 return instance;
             }
         }
+
         public ApiConnect()
         {
             client = new HttpClient()
@@ -74,11 +75,56 @@ namespace TimerBestBoy2.Model
             }
         }
 
-        public async Task<List<Event>> GetEventsList(int subdivision_id)
+        public async Task<List<Education>> GetEducationsList(int employee_id)
         {
             try
             {
-                var response = await client.GetAsync($"Events/GetEmployeesList?subdivision_id={subdivision_id}");
+                var response = await client.GetAsync($"Events/GetEducationsList?employee_id={employee_id}");
+                if (!response.IsSuccessStatusCode)
+                {
+                    MessageBox.Show("Что-то пошло не так", $"Ошибка: {response.StatusCode}");
+                    return null;
+                }
+                else
+                {
+                    return await response.Content.ReadFromJsonAsync<List<Education>>();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Всё сломалось: {ex.Message}");
+                return null;
+            }
+        }
+
+        public async Task<List<EmployeesAbsenceCalendar>> GetAbsenceCalendarList(int employee_id)
+        {
+            try
+            {
+                var response = await client.GetAsync($"Events/GetAbsenceCalendar?employee_id={employee_id}");
+                if (!response.IsSuccessStatusCode)
+                {
+                    MessageBox.Show("Что-то пошло не так", $"Ошибка: {response.StatusCode}");
+                    return null;
+                }
+                else
+                {
+                    return await response.Content.ReadFromJsonAsync<List<EmployeesAbsenceCalendar>>();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Всё сломалось: {ex.Message}");
+                return null;
+            }
+        }
+
+
+        public async Task<List<Event>> GetEventsList(int employee_id)
+        {
+            try
+            {
+                var response = await client.GetAsync($"Events/GetEventsList?employee_id={employee_id}");
                 if (!response.IsSuccessStatusCode)
                 {
                     MessageBox.Show("Что-то пошло не так", $"Ошибка: {response.StatusCode}");

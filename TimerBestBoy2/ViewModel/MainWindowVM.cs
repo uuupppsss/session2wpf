@@ -47,7 +47,5 @@ namespace TimerBestBoy2.ViewModel
                 win.ShowDialog();
             });
         }
-
-
     }
 }

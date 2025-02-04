@@ -26,12 +26,12 @@
 
         public string? MobilePhone { get; set; }
 
-        public Employee? Helper { get; set; }
+        //public Employee? Helper { get; set; }
 
-        public JobTitle JobTitle { get; set; } = null!;
+        //public JobTitle JobTitle { get; set; } = null!;
 
-        public Subdivision Subdivision { get; set; } = null!;
+        //public Subdivision Subdivision { get; set; } = null!;
 
-        public Employee? Supervisor { get; set; }
+        //public Employee? Supervisor { get; set; }
     }
 }
