@@ -31,6 +31,12 @@ public partial class Employee
 
     public virtual ICollection<Calendar> Calendars { get; set; } = new List<Calendar>();
 
+    public virtual ICollection<EducationEmployee> EducationEmployees { get; set; } = new List<EducationEmployee>();
+
+    public virtual ICollection<EmployeesAbsenceCalendar> EmployeesAbsenceCalendarEmployees { get; set; } = new List<EmployeesAbsenceCalendar>();
+
+    public virtual ICollection<EmployeesAbsenceCalendar> EmployeesAbsenceCalendarInsteadEmployees { get; set; } = new List<EmployeesAbsenceCalendar>();
+
     public virtual Employee? Helper { get; set; }
 
     public virtual ICollection<Employee> InverseHelper { get; set; } = new List<Employee>();

@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace api.Model;
 
-public partial class JobTitle
+public partial class EducationClassification
 {
     public int Id { get; set; }
 
     public string Name { get; set; } = null!;
 
-    public virtual ICollection<Employee> Employees { get; set; } = new List<Employee>();
+    public virtual ICollection<Education> Educations { get; set; } = new List<Education>();
 }

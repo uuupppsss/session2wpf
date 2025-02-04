@@ -74,7 +74,7 @@ namespace TimerBestBoy2.Model
             }
         }
 
-        public async Task<List<Event>> GetEventsList()
+        public async Task<List<Event>> GetEventsList(int subdivision_id)
         {
             try
             {
@@ -86,7 +86,7 @@ namespace TimerBestBoy2.Model
                 }
                 else
                 {
-                    return await response.Content.ReadFromJsonAsync<List<Employee>>();
+                    return await response.Content.ReadFromJsonAsync<List<Event>>();
                 }
             }
             catch (Exception ex)

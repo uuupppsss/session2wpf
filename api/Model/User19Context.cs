@@ -15,9 +15,21 @@ public partial class User19Context : DbContext
     {
     }
 
+    public virtual DbSet<AbsenceReason> AbsenceReasons { get; set; }
+
     public virtual DbSet<Calendar> Calendars { get; set; }
 
+    public virtual DbSet<Education> Educations { get; set; }
+
+    public virtual DbSet<EducationClassification> EducationClassifications { get; set; }
+
+    public virtual DbSet<EducationEmployee> EducationEmployees { get; set; }
+
+    public virtual DbSet<EducationMaterial> EducationMaterials { get; set; }
+
     public virtual DbSet<Employee> Employees { get; set; }
+
+    public virtual DbSet<EmployeesAbsenceCalendar> EmployeesAbsenceCalendars { get; set; }
 
     public virtual DbSet<Event> Events { get; set; }
 
@@ -33,10 +45,16 @@ public partial class User19Context : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("server=192.168.200.35; user=user19; password=70144; database=user19; trustservercertificate=true;");
+        => optionsBuilder.UseSqlServer("Server=192.168.200.35;Database=user19;user=user19;password=70144;TrustServerCertificate=true;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<AbsenceReason>(entity =>
+        {
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Name).HasMaxLength(50);
+        });
+
         modelBuilder.Entity<Calendar>(entity =>
         {
             entity.ToTable("calendar");
@@ -52,6 +70,60 @@ public partial class User19Context : DbContext
             entity.HasOne(d => d.Event).WithMany(p => p.Calendars)
                 .HasForeignKey(d => d.EventId)
                 .HasConstraintName("FK_calendar_Event");
+        });
+
+        modelBuilder.Entity<Education>(entity =>
+        {
+            entity.ToTable("Education");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.ClassificationId).HasColumnName("classification_id");
+            entity.Property(e => e.Description).HasMaxLength(255);
+
+            entity.HasOne(d => d.Classification).WithMany(p => p.Educations)
+                .HasForeignKey(d => d.ClassificationId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Education_EducationClassifications");
+        });
+
+        modelBuilder.Entity<EducationClassification>(entity =>
+        {
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Name).HasMaxLength(255);
+        });
+
+        modelBuilder.Entity<EducationEmployee>(entity =>
+        {
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.EducationId).HasColumnName("education_id");
+            entity.Property(e => e.EmployeeId).HasColumnName("employee_id");
+
+            entity.HasOne(d => d.Education).WithMany(p => p.EducationEmployees)
+                .HasForeignKey(d => d.EducationId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_EducationEmployees_Education");
+
+            entity.HasOne(d => d.Employee).WithMany(p => p.EducationEmployees)
+                .HasForeignKey(d => d.EmployeeId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_EducationEmployees_Employee");
+        });
+
+        modelBuilder.Entity<EducationMaterial>(entity =>
+        {
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.EducationId).HasColumnName("education_id");
+            entity.Property(e => e.MaterialId).HasColumnName("material_id");
+
+            entity.HasOne(d => d.Education).WithMany(p => p.EducationMaterials)
+                .HasForeignKey(d => d.EducationId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_EducationMaterials_Education");
+
+            entity.HasOne(d => d.Material).WithMany(p => p.EducationMaterials)
+                .HasForeignKey(d => d.MaterialId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_EducationMaterials_Material");
         });
 
         modelBuilder.Entity<Employee>(entity =>
@@ -89,6 +161,31 @@ public partial class User19Context : DbContext
             entity.HasOne(d => d.Supervisor).WithMany(p => p.InverseSupervisor)
                 .HasForeignKey(d => d.SupervisorId)
                 .HasConstraintName("FK_Employee_Employee1");
+        });
+
+        modelBuilder.Entity<EmployeesAbsenceCalendar>(entity =>
+        {
+            entity.ToTable("EmployeesAbsenceCalendar");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.EmployeeId).HasColumnName("employee_id");
+            entity.Property(e => e.InsteadEmployeeId).HasColumnName("insteadEmployee_id");
+            entity.Property(e => e.ReasonId).HasColumnName("reason_id");
+
+            entity.HasOne(d => d.Employee).WithMany(p => p.EmployeesAbsenceCalendarEmployees)
+                .HasForeignKey(d => d.EmployeeId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_EmployeesAbsenceCalendar_Employee");
+
+            entity.HasOne(d => d.InsteadEmployee).WithMany(p => p.EmployeesAbsenceCalendarInsteadEmployees)
+                .HasForeignKey(d => d.InsteadEmployeeId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_EmployeesAbsenceCalendar_Employee1");
+
+            entity.HasOne(d => d.Reason).WithMany(p => p.EmployeesAbsenceCalendars)
+                .HasForeignKey(d => d.ReasonId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_EmployeesAbsenceCalendar_AbsenceReasons");
         });
 
         modelBuilder.Entity<Event>(entity =>
@@ -155,6 +252,7 @@ public partial class User19Context : DbContext
 
             entity.HasOne(d => d.Author).WithMany(p => p.Materials)
                 .HasForeignKey(d => d.AuthorId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Material_Employee");
         });
 
